@@ -1,0 +1,23 @@
+servingEngineSpec:
+  strategy:
+    type: Recreate
+  runtimeClassName: ""
+  modelSpec:
+  - name: "e5-base-v2"
+    repository: "vllm/vllm-openai"
+    tag: "latest"
+    modelURL: "intfloat/e5-base-v2"
+
+    replicaCount: 1
+
+    requestCPU: 8
+    requestMemory: "16Gi"
+    requestGPU: 4
+
+    vllmConfig:
+      extraArgs: 
+        - "--data-parallel-size"
+        - "4"
+
+    envFromSecret:
+      name: "dotenv-secret"
